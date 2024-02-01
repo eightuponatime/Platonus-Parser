@@ -1,11 +1,11 @@
 import puppeteer from 'puppeteer';
 
 export default async function parsePlatonus(username, password) {
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
 
   try {
-    await page.setDefaultNavigationTimeout(60 * 1000);
+    await page.setDefaultNavigationTimeout(120 * 1000);
     await page.goto('https://edu2.aues.kz/index?sid=null&returnUrl=%2Ftemplate.html%23%2Fwelcome');
 
     await page.waitForSelector("#login_input");
@@ -71,9 +71,9 @@ export default async function parsePlatonus(username, password) {
 
       schedule.forEach(item => {
         if(typeof item === 'string') {
-          outputString += `---------------------------------------------\n${item}\n`;
+          outputString += `${item}\n`;
         } else {
-          outputString += `Время: ${item.time}\nПредмет: ${item.subject}\n`;
+          outputString += `\nВремя: ${item.time}\nПредмет: ${item.subject}\n`;
         }
       });
 
