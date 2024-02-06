@@ -35,7 +35,6 @@ export default async function parsePlan(username, password) {
       await page.click("[id^=select2-termNumber]");
       await page.waitForSelector(".select2-results__options");
       await page.type('.select2-search__field', '2');
-      
 
       await page.keyboard.press('Enter');
       await new Promise((resolve) => setTimeout(resolve, 3 * 1000));
@@ -58,13 +57,22 @@ export default async function parsePlan(username, password) {
       
       let outputString = '';
 
-      subjects.forEach(item => {
+      /*subjects.forEach(item => {
         if (Object.keys(item).length > 0) {
-          outputString += `\nПредмет: ${item.name}\nПреподаватель: ${item.teacher}\n`;
+          outputString += `\nПредмет: ${item.name}\nПреподаватель: ${item.teacher} splitter\n`;
         }
-      });
+      });*/
+      const nonEmptySubjects = subjects.filter(item => Object.keys(item).length > 0);
 
-      console.log(outputString);
+      nonEmptySubjects.slice(0, -1).forEach((item) => {
+        outputString += `\nПредмет: ${item.name}\nПреподаватель: ${item.teacher} splitter\n`;
+      });
+      
+      if (nonEmptySubjects.length > 0) {
+        outputString += `\nПредмет: ${nonEmptySubjects[nonEmptySubjects.length - 1].name}\nПреподаватель: ${nonEmptySubjects[nonEmptySubjects.length - 1].teacher}\n`;
+      }
+
+      //console.log(outputString);
       return outputString;  
     } else {
         console.log('login failed, looser');

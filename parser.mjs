@@ -77,7 +77,7 @@ export default async function parsePlatonus(username, password) {
         }
       });
 
-      console.log(outputString);
+      //console.log(outputString);
       return outputString;
     } else {
         console.log('login failed, looser');
