@@ -1,2 +1,1 @@
-parser used for platonus application -> https://github.com/eightuponatime/platonus-app
-built with puppeteer
+platonus parser built with puppeteer (not actual because platonus is now more broken than it was)
